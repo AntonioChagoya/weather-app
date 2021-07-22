@@ -1,5 +1,6 @@
-# Rect Weather App
-## Challenge: Create a weather app using an API. Use Front-end libraries like React or Vue.
+# React Weather App
+## Challenge: 
+Create a weather app using an API. Use Front-end libraries like React or Vue.
 
 ## User story:
 - I can see city weather as default, preferably my current location

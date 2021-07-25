@@ -1,38 +1,157 @@
-.App {
+/* 
+* Custom Fonts
+*
+*
+*
+*
+*/
+@font-face {
+  font-family: 'Raleway-Light';
+  font-weight: 300;
+  src: local('Raleway-Light'), url(./assets/fonts/Raleway-Light.ttf) format('ttf');
+}
+@font-face {
+  font-family: 'Raleway-Regular';
+  font-weight: 400;
+  src: local('Raleway-Regular'), url(./assets/fonts/Raleway-Regular.ttf) format('ttf');
+}
+@font-face {
+  font-family: 'Raleway Medium';
+  font-weight: 500;
+  src: local('Raleway-Medium'), url(./assets/fonts/Raleway-Medium.ttf) format('ttf');
+}
+@font-face {
+  font-family: 'Raleway Semi-bold';
+  font-weight: 600;
+  src: local('Raleway-SemiBold'), url(./assets/fonts/Raleway-SemiBold.ttf) format('ttf');
+}
+@font-face {
+  font-family: 'Raleway Bold';
+  font-weight: 800;
+  src: local('Raleway-Bold'), url(./assets/fonts/Raleway-Bold.ttf) format('ttf');
+}
+
+
+/*
+* Main page styles
+* 
+*
+*/
+
+html{
+  padding: 0%;
+  margin: 0%;
+  font-family: 'Raleway', Arial, Helvetica, sans-serif;
+}
+*{
+  padding: 0%;
+  margin: 0%;
+}
+body{
+  background: #f1f1f1;
+  color: white;
+}
+button{
+  background-color: #6E707A;
+  color: white;
+  padding: 10px 20px;
+  margin: 5px;
+  border: none;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  font-family: 'Raleway Regular';
+  font-size: 16px;
+}
+button:hover, button:focus{
+  background-color: rgba(168, 168, 168, 0.623);
+}
+#root{
+  padding: 1% 13%;
+}
+.App{
+  background: #100E1D;
+  overflow: hidden;
+  height: 95vh;
+  max-height: 900px;
+  min-height: 700px;
+  max-width: 1440px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 5px rgb(24 24 24 / 40%);
+  margin: 0 auto;
+}
+
+/* Sidebar */
+.sidebar{
+  background-color: #1E213A;
+  width: 31%;
+  height: 100%;
+  padding: 3% 0
+}
+
+/* - Menu */
+.sidebar--menu{
+  display: flex;
+  justify-content: space-around;
+}
+.btn--icon__round{
+  width: 40px;
+  height: 40px;
+  border-radius: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* - Weather image */
+.weather--visual{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  min-height: 250px;
+  max-height: 280px;
+  height: 300px;
+  width: 100%;
+}
+.weather--visual:before{
+  content: "";
+  background-image: url(../src/assets/images/Cloud-background.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  top: 0;
+  right: -25%;
+  bottom: 0;
+  left: -25%;
+  opacity: 0.05;
+}
+.weather--visual img{
+  width: 45%;
+}
+
+
+/* Number */
+
+.weather--number{
+  font-family: Raleway;
+  font-size: 104px;
+  font-weight: 500;
+  text-align: center;
+  color: white;
+  line-height: 169px;
+}
+.weather--number span{
+  font-family: Raleway;
+  font-size: 48px;
+  color: #A09FB1;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* City */
+.weather--city{
+  font-family: 'Raleway Regular';
+  font-size: 25px;
+  color: #A09FB1;
+  text-align: center;
 }

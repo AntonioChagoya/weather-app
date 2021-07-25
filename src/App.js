@@ -1,24 +1,34 @@
-import logo from './logo.svg';
+import React, {useState, useEffect} from 'react';
 import './App.css';
+import Sidebar from './components/sidebar'
+import SidebarMenu from './components/sidebar--menu'
 
 function App() {
+
+  const [weatherState, setWeatherState] = useState([]);
+  useEffect(() => {
+    const getWeatherState = async () => {
+      const formatedURL= `https://www.metaweather.com/api/location/2487956/ `
+
+      const response = await fetch(formatedURL)
+      const data = await response.json();
+
+      console.log('Response data: ', data)
+      setWeatherState(data)
+      }
+    getWeatherState()
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <section className="sidebar" > 
+        <SidebarMenu />
+        <Sidebar 
+          city={weatherState}
+        />
+    </section>
     </div>
+
   );
 }
 

@@ -1,5 +1,6 @@
-# weather-app
-## Challenge: Create a weather app using an API. Use Front-end libraries like React or Vue.
+# React Weather App
+## Challenge: 
+Create a weather app using an API. Use Front-end libraries like React or Vue.
 
 - User story: I can see city weather as default, preferably my current location
 - User story: I can search for city
@@ -15,6 +16,6 @@
 - User story(optional): I can convert temperature in Celcius to Fahrenheit and vice versa
 - 
 Icon: https://google.github.io/material-design-icons/  
-API: https://www.metaweather.com/api/  
+API: https://www.metaweather.com/api/ 
 
 Tips: For Front-end developer, you can use https://cors-anywhere.herokuapp.com/ to help with accessing data from other websites that are normally forbidden by the same-origin policy of web browsers

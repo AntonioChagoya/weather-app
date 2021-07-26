@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
-import Sidebar from './components/sidebar'
+import SidebarInfo from './components/sidebar--info';
 import SidebarMenu from './components/sidebar--menu'
+import SidebarSearch from './components/sidebar--search';
+
 
 function App() {
 
@@ -21,10 +23,18 @@ function App() {
 
   return (
     <div className="App">
-      <section className="sidebar" > 
+      <section className="search">
+        <SidebarSearch /> 
+      </section> 
+
+      <section className="sidebar" >
         <SidebarMenu />
-        <Sidebar 
+        <SidebarInfo 
           city={weatherState}
+          image_url={weatherState.consolidated_weather}
+          temperature={weatherState.consolidated_weather}
+          statusCollection={weatherState.consolidated_weather}
+          date={weatherState.time}
         />
     </section>
     </div>

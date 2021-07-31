@@ -1,67 +1,92 @@
+// React Core
 import React, {useState, useEffect} from 'react';
 import './App.css';
+
+// Components
 import SidebarInfo from './components/sidebar--info';
-// import SidebarMenu from './components/sidebar--menu'
 import SidebarSearch from './components/sidebar--search';
+import Predicts from './components/predicts';
+import ConverUnits from './components/convertUnits';
+
+// Material UI
 import MyLocationIcon from '@material-ui/icons/MyLocation';
 
-
 function App() {
+  // Constant url for weather app 
+  const BASE_API_URL = 'https://www.metaweather.com'
 
+  // Location information, and a 5 day forecast. This API requieres a woeid number at the end - /api/location/woeid/
+  const LOCATION_API = '/api/location/' 
+
+
+
+  // Info state
   const [weatherState, setWeatherState] = useState([]);
+
   useEffect(() => {
-    const getWeatherState = async () => {
-      const formatedURL= `https://www.metaweather.com/api/location/2487956/ `
+      const getWeatherState = async () => {
 
-      const response = await fetch(formatedURL)
-      const data = await response.json();
+        try{
+          // Location API petition
+          const locationFormatedURL = `${BASE_API_URL}${LOCATION_API}2487956/ `
+          const response = await fetch(locationFormatedURL)
+          const locationData = await response.json();
 
-      console.log('Response data: ', data)
-      setWeatherState(data)
+          console.log('Response data: ', locationData)
+          setWeatherState(locationData)
+        }catch(err){
+          console.log(err)
+        }
+        
       }
-    getWeatherState()
+      getWeatherState()
   }, [])
 
+  // Sidebar State
   const [sidebarState, setSidebarState] = useState(false);
   
   return (
       <div className="App">
-        
-
-      <section className="sidebar" >
-        { sidebarState 
-          ? (
-            <SidebarSearch 
-              searchState={sidebarState}
-              setSearchState={setSidebarState}
-            />
-          )
-          : (
-            <>
-              <div className="menu" >
-                <button type="submit" 
-                  onClick={() => setSidebarState((sidebarState) => !sidebarState)} 
-                  className="btn"
-                >
-                  Search for places
-                </button>   
-
-                <button className="btn--icon__round"><MyLocationIcon /></button> 
-              </ div>
-              <SidebarInfo 
-                city={weatherState}
-                image_url={weatherState.consolidated_weather}
-                temperature={weatherState.consolidated_weather}
-                statusCollection={weatherState.consolidated_weather}
-                date={weatherState.time}
+        <aside className="sidebar" >
+          { sidebarState 
+            ? (
+              <SidebarSearch 
+                searchState={sidebarState}
+                setSearchState={setSidebarState}
               />
-            </>
-          )
-        }  
+            )
+            : (
+              <>
+                <div className="menu" >
+                  <button type="submit" 
+                    onClick={() => setSidebarState((sidebarState) => !sidebarState)} 
+                    className="btn"
+                  >
+                    Search for places
+                  </button>   
 
-        
-    </section>
-    </div>
+                  <button className="btn--icon__round"><MyLocationIcon /></button> 
+                </ div>
+                <SidebarInfo 
+                  city={weatherState}
+                  image_url={weatherState.consolidated_weather}
+                  temperature={weatherState.consolidated_weather}
+                  statusCollection={weatherState.consolidated_weather}
+                  date={weatherState.time}
+                />
+              </>
+            )
+          }  
+        </aside>
+        <main>
+          <ConverUnits />
+          <Predicts 
+            weather={weatherState}
+            image_url={weatherState.consolidated_weather}
+            temperature={weatherState.consolidated_weather}
+          />
+        </main>
+      </div>
 
   );
 }

@@ -4,16 +4,6 @@ import Thunder from '../assets/images/Thunderstorm.png'
 function Predicts({image_url, weatherState, temperature}){
   const BASE_URL = `https://www.metaweather.com/static/img/weather/`
   
-  // function getCity(city){
-  //   if(city){
-  //     let cityName = city.title
-      
-  //     return cityName
-  //   }else{
-  //     return "Serching for your location..." 
-  //   }
-  // }
-
   function getTemp(temperature){
     if(temperature){
       const temperatureProm = temperature.map(element => {
@@ -51,25 +41,6 @@ function Predicts({image_url, weatherState, temperature}){
     }
   }
 
-  // function getDate(dateWithoutFormat) {
-  //   if(dateWithoutFormat){
-  //     let date = dateWithoutFormat.split('-');
-  //     // let year = date[0];
-  //     let month = date[1]; 
-  //     let dayNoFormat = date[2].split('T');
-  //     let day = dayNoFormat[0]
-
-  //     const monthsText = ['January', 'February', 'March', 'April', 'May ', 'June', 'July ', 'August', 'September', 'October', 'November', 'December']
-  //     if(month === '07' ){
-  //       month = monthsText[6]
-  //     }
-
-  //     return `Fri, ${day} ${month}`
-  //   }else{
-  //     return `----`
-  //   }
-  // }
-  
   return(
       <section className="predicts">
         <div className="predicts--card">

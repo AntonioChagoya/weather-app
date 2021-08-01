@@ -26,10 +26,22 @@
   font-weight: 800;
   src: local('Raleway-Bold'), url(./assets/fonts/Raleway-Bold.ttf) format('ttf');
 }
+/* 
+* Fonts 
+*/
+h1, h2, h3, h4, h5, h6{
+  font-family: 'Raleway', Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+h5{
+  font-size: 16px;
+  font-weight: 500;
+}
+
 
 
 /*
-* Main page
+* Defaults
 */
 
 html{
@@ -74,19 +86,30 @@ button:hover, button:focus{
   cursor: pointer;
 }
 #root{
-  padding: 1% 13%;
+  padding: 1%;
 }
 .App{
-  background: #100E1D;
+  display: flex;
   overflow: hidden;
+
   height: 95vh;
-  max-height: 1023px;
+  max-height: 1024px;
   min-height: 900px;
   max-width: 1440px;
+  min-width: 1024px;
+  
+  background: #100E1D;
+
   border-radius: 12px;
   box-shadow: 0px 4px 5px rgb(24 24 24 / 40%);
+
   margin: 0 auto;
 }
+main{
+  width: 69%;
+  padding: 40px 125px 50px 150px;
+}
+
 
 /*
 * Sidebar info - /components/sidebar--info.js component
@@ -277,4 +300,173 @@ button:hover, button:focus{
 }
 .search-button__close svg{ 
   transform: scale(1.4);
+}
+
+/* 
+* Unis container
+*/
+.units--container{
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 0 75px 0;
+}
+
+/*
+* Predicts 
+*/
+
+.predicts{
+  display: grid;
+  grid-template: 177px/repeat(5, 1fr);
+  column-gap: 15px;
+  min-width: 600px;
+}
+.predicts--card{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background: #1E213A;
+  padding: 15px;
+}
+.predicts--card img{
+  max-width: 100%;
+  min-width: 56px;
+  width: 70%;
+}
+.predicts--card span{
+  margin-top: 20px;
+}
+
+
+@media(max-width: 1440px){
+  /* Defaults */
+  #root{
+    padding: 0;
+  }
+  main{
+    padding: 3% 5% 3%;
+  }
+  .App{
+    height: 100vh;
+    border-radius: 0;
+  }
+  /* Predicts */
+  .predicts {
+    min-width: 600px;
+  }
+  .predicts--card img{
+    width: 60%;
+  }
+  .predicts--card span{
+    margin-top: 15px;
+  }
+}
+
+@media(max-width: 1023px){
+  /* Defaults */
+  #root{
+    padding: 1% 5%;
+  }
+  main{
+    padding: 3%;
+  }
+  .App{
+    flex-direction: column;
+
+    overflow-x:hidden;
+
+    height: 100%;
+
+    max-height: 100%;
+    min-width: 550px;
+    max-width: 900px;
+
+    border-radius: 20px;
+  }
+  /* Sidebar */
+  .sidebar{
+    width: 100%;
+  }
+
+  /* - Weather */
+  .weather--visual img {
+    width: 20%;
+    min-width: 200px;
+  }
+  
+  /* Predicts */
+  .predicts {
+    min-width: 600px;
+  }
+  .predicts--card img{
+    width: 60%;
+  }
+  .predicts--card span{
+    margin-top: 15px;
+  }
+
+  /* Main */
+  main{
+    width: 100%;
+    padding: 50px;
+  }
+
+}
+@media(max-width: 780px){
+  .predicts{
+    min-width: 400px;
+    max-width: 100%;
+    grid-template: repeat(2, 177px)/repeat(3, 1fr);
+    row-gap: 15px;
+  }
+  .predicts--card img{
+    width: 40%;
+  }
+}
+@media(max-width: 600px){
+  /* Defaults */
+  #root{
+    overflow-x: hidden;
+    padding: 0px;
+  }
+  main{
+    padding: 50px;
+  }
+  .App{
+    flex-direction: column;
+
+    overflow-y:visible ;
+
+    max-height: 100vh;
+    height: 100%;
+    min-width: 325px;
+    max-width: 900px;
+
+    border-radius: 0px;
+  }
+  /* Sidebar */
+  .sidebar{
+    width: 100%;
+  }
+
+  /* - Weather */
+  .weather--visual img {
+    width: 50%;
+    min-width: 150px;
+    max-width: 200px;
+  }
+  
+  /* Predicts */
+  .predicts {
+    min-width: 200px;
+    max-width: 100%;
+    grid-template: repeat(3, 1fr)/repeat(2, 1fr);
+  }
+  .predicts--card img{
+    width: 60%;
+  }
+  .predicts--card span{
+    margin-top: 15px;
+  }
 }

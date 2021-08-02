@@ -72,14 +72,16 @@ input{
   cursor: pointer;
 }
 button{
-  background-color: #6E707A;
-  color: white;
+  font-family: 'Raleway Regular';
+  font-size: 16px;
+
   padding: 10px 20px;
   margin: 5px;
   border: none;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  font-family: 'Raleway Regular';
-  font-size: 16px;
+
+  background-color: #6E707A;
+  color: white;
 }
 button:hover, button:focus{
   background-color: rgba(168, 168, 168, 0.623);
@@ -310,6 +312,29 @@ main{
   justify-content: flex-end;
   margin: 0 0 75px 0;
 }
+.units--container .units button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: 'Raleway',Arial, Helvetica, sans-serif;
+  font-weight: 700;
+
+  width: 40px;
+  height: 40px;
+
+  border-radius: 100px;
+}
+.units--container .units button:hover{
+  opacity: .89;
+  transform: scale(1.1);
+}
+
+.units--container .units.active button{
+  background-color: #f1f1f1;
+  color: black;
+}
+
 
 /*
 * Predicts 
@@ -431,7 +456,7 @@ main{
     padding: 0px;
   }
   main{
-    padding: 50px;
+    padding: 54px;
   }
   .App{
     flex-direction: column;
@@ -448,6 +473,7 @@ main{
   /* Sidebar */
   .sidebar{
     width: 100%;
+    min-height: 810px;
   }
 
   /* - Weather */
@@ -461,7 +487,11 @@ main{
   .predicts {
     min-width: 200px;
     max-width: 100%;
-    grid-template: repeat(3, 1fr)/repeat(2, 1fr);
+    grid-template: repeat(auto-fit, minmax(177px,1fr))/repeat(auto-fit, minmax(122px, 1fr));
+    grid-template-rows: minmax(177px, 1fr);
+  }
+  .predicts--card{
+    min-height: 177px;
   }
   .predicts--card img{
     width: 60%;

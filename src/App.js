@@ -7,6 +7,7 @@ import SidebarInfo from './components/sidebar--info';
 import SidebarSearch from './components/sidebar--search';
 import Predicts from './components/predicts';
 import ConverUnits from './components/convertUnits';
+import HighLights from './components/highlights'
 
 // Material UI
 import MyLocationIcon from '@material-ui/icons/MyLocation';
@@ -28,11 +29,11 @@ function App() {
 
         try{
           // Location API petition
-          const locationFormatedURL = `${BASE_API_URL}${LOCATION_API}2487956/ `
+          const locationFormatedURL = `${BASE_API_URL}${LOCATION_API}44418/`
           const response = await fetch(locationFormatedURL)
           const locationData = await response.json();
 
-          console.log('Response data: ', locationData)
+          // console.log('Response data: ', locationData)
           setWeatherState(locationData)
         }catch(err){
           console.log(err)
@@ -73,6 +74,8 @@ function App() {
                   temperature={weatherState.consolidated_weather}
                   statusCollection={weatherState.consolidated_weather}
                   date={weatherState.time}
+                  predicts={weatherState.consolidated_weather}
+
                 />
               </>
             )
@@ -81,10 +84,12 @@ function App() {
         <main>
           <ConverUnits />
           <Predicts 
-            weather={weatherState}
             image_url={weatherState.consolidated_weather}
             temperature={weatherState.consolidated_weather}
+            predicts={weatherState.consolidated_weather}
+            date={weatherState.time}
           />
+          <HighLights />
         </main>
       </div>
 

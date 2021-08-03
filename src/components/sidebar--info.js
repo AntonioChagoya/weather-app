@@ -5,7 +5,7 @@ import Thunder from '../assets/images/Thunderstorm.png'
 // Material UI Icons
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 
-function SidebarInfo({image_url, city, temperature, date, separator, statusCollection}){
+function SidebarInfo({image_url, city, temperature, date, statusCollection,predicts}){
   const BASE_URL = `https://www.metaweather.com/static/img/weather/`
   
   function getCity(city){
@@ -46,22 +46,29 @@ function SidebarInfo({image_url, city, temperature, date, separator, statusColle
     }
   }
 
-  function getDate(dateWithoutFormat) {
-    if(dateWithoutFormat){
-      let date = dateWithoutFormat.split('-');
-      // let year = date[0];
-      let month = date[1]; 
-      let dayNoFormat = date[2].split('T');
-      let day = dayNoFormat[0]
+  function getPredictsDays(predicts, wantedDay) {
+    const daysText = ['Mon','Tues', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun']
+    const monthsText = ['Jan', 'Feb', 'Mar', 'Apr', 'May ', 'Jun', 'Jul ', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
-      const monthsText = ['January', 'February', 'March', 'April', 'May ', 'June', 'July ', 'August', 'September', 'October', 'November', 'December']
-      if(month === '07' ){
-        month = monthsText[6]
-      }
+    if (predicts && ( wantedDay >= 0 )) {
+      let dayData = predicts[wantedDay] 
+      let date = new Date(dayData.applicable_date)
 
-      return `Fri, ${day} ${month}`
+      let monthText = monthsText[date.getMonth()]
+
+      let dayOfTheMonth = date.getDate()
+      let dayPosition = date.getDay()
+      let dayText = daysText[dayPosition-1]
+      
+
+      console.log("" )
+      console.log('Real date ', date )
+      console.log('Day ', dayOfTheMonth )
+      console.log(`DayText: ${dayText}, Day: ${dayOfTheMonth}, Month ${monthText}`)
+      
+      return `${dayText}, ${dayOfTheMonth} ${monthText}` 
     }else{
-      return `----`
+      return '---'
     }
   }
   
@@ -97,7 +104,7 @@ function SidebarInfo({image_url, city, temperature, date, separator, statusColle
         <div>
           <div className="weather--status-date">
             <span>
-              Today <span className='weater--separator'>•</span> {getDate(date)}
+              Today <span className='weater--separator'>•</span>{getPredictsDays(predicts, 0)}
             </span> 
           </div>
 

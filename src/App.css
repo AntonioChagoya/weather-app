@@ -37,7 +37,10 @@
     font-size: 16px;
     font-weight: 500;
   }
-
+  a{
+    font-weight: 600;
+    color: white;
+  }
 
 
   /*
@@ -108,13 +111,15 @@
     box-shadow: 0px 4px 5px rgb(24 24 24 / 40%);
 
     margin: 0 auto;
+    
   }
   main{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-content: center;
     width: 69%;
-    padding: 40px 125px 50px 150px;
+    padding: 40px 125px 10px 150px;
   }
 
 
@@ -353,6 +358,7 @@
     align-items: center;
     background: #1E213A;
     padding: 15px;
+    cursor: crosshair;
   }
   .predicts--card img{
     max-width: 60px;
@@ -386,19 +392,30 @@
   * Highlights
   */
   .highlights{
+    font-family: 'Raleway',Arial, Helvetica, sans-serif;
     overflow: hidden;
     margin: 20px 0;
   }
   .highlights h2{
     text-align: left;
     font-size: 24px;
+    margin-bottom:32px;
+  }
+  .highlights h3{
+    font-size: 64px;
+    font-weight: 700;
     margin-bottom: 16px;
   }
+  .highlights span{
+    font-size: 30px;
+    font-weight: 400;
+  }
+  
   .highlights--container{
     display: grid;
     min-height: 100%;
 
-    grid-template: repeat(2, 1fr)/repeat(2, 1fr);
+    grid-template: 200px 160px/repeat(2, 1fr);
     gap: 50px;
   }
   .highlights--box{
@@ -406,9 +423,15 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    place-content: center;
 
     background: #1E213A;
     padding: 10%;
+
+    cursor: crosshair;
+  }
+  .highlights--box:hover{
+    transform: scale(1.02);
   }
   .highlights--box__big{
     min-height: 180px;
@@ -416,8 +439,17 @@
   }
   .highlights--box__small{
     max-height: 160px;
+    min-height: 159px;
   }
 
+  /* Copyright */
+  .copyrgiht{
+    text-align: center;
+    font-size: 14px;
+    
+    margin: 15px 0;
+    color: #A09FB1;
+  }
 
   @media(max-width: 1440px){
     /* Defaults */
@@ -425,7 +457,7 @@
       padding: 0;
     }
     main{
-      padding: 3% 5% 3%;
+      padding: 3% 5%;
     }
     .App{
       height: 100vh;
@@ -503,6 +535,18 @@
     .predicts--card img{
       width: 40%;
     }
+
+    /* Highlights */
+    .highlights--container {
+      gap: 30px;
+  }
+    .highlights h3 {
+      font-size: 40px;
+    }
+    .highlights h5 {
+      font-size: 14px;
+    }
+
   }
   @media(max-width: 600px){
     /* Defaults */

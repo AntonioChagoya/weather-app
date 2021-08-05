@@ -40,7 +40,7 @@ function SidebarInfo({image_url, city, temperature, date, statusCollection,predi
       const imageUrls = images.map(image => {
         return image.weather_state_abbr
       });
-      return `${URL}${imageUrls[5]}.svg`
+      return `${URL}${imageUrls[0]}.svg`
     }else{
       return placeholder
     }
@@ -51,22 +51,18 @@ function SidebarInfo({image_url, city, temperature, date, statusCollection,predi
     const monthsText = ['Jan', 'Feb', 'Mar', 'Apr', 'May ', 'Jun', 'Jul ', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
     if (predicts && ( wantedDay >= 0 )) {
+      // Raw data
       let dayData = predicts[wantedDay] 
       let date = new Date(dayData.applicable_date)
-
-      let monthText = monthsText[date.getMonth()]
-
-      let dayOfTheMonth = date.getDate()
       let dayPosition = date.getDay()
-      let dayText = daysText[dayPosition-1]
+      
+      // Final data
+      let dayText = daysText[dayPosition]
+      let day = dayData.applicable_date.split('-')[2]
+      let monthText = monthsText[date.getMonth()]
       
 
-      console.log("" )
-      console.log('Real date ', date )
-      console.log('Day ', dayOfTheMonth )
-      console.log(`DayText: ${dayText}, Day: ${dayOfTheMonth}, Month ${monthText}`)
-      
-      return `${dayText}, ${dayOfTheMonth} ${monthText}` 
+      return `${dayText}, ${parseInt(day, 10)} ${monthText}` 
     }else{
       return '---'
     }
@@ -90,28 +86,19 @@ function SidebarInfo({image_url, city, temperature, date, statusCollection,predi
         </div>
 
         <div className="weather--number">
-          <p>
-            {getTemp(temperature)}<span>°C</span>
-          </p>
+          <p>{getTemp(temperature)}<span>°C</span></p>
         </div>
-
         <div className="weather--status">
-          <h4>
-            {getStatus(statusCollection)}
-          </h4>
+          <h4>{getStatus(statusCollection)}</h4>
         </div>
 
         <div>
           <div className="weather--status-date">
-            <span>
-              Today <span className='weater--separator'>•</span>{getPredictsDays(predicts, 0)}
-            </span> 
+            <span>Today <span className='weater--separator'>•</span>{getPredictsDays(predicts, 0)}</span> 
           </div>
 
           <div className="weather--current-location">
-            <span>
-              <LocationOnIcon />{getCity(city)}
-            </span>
+            <span><LocationOnIcon />{getCity(city)}</span>
           </div>
         </div>
       </div>

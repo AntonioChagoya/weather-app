@@ -15,23 +15,48 @@ import MyLocationIcon from '@material-ui/icons/MyLocation';
 function App() {
   // Constant url for weather app 
   const BASE_API_URL = 'https://www.metaweather.com'
-
   // Location information, and a 5 day forecast. This API requieres a woeid number at the end - /api/location/woeid/
   const LOCATION_API = '/api/location/' 
-
-
-
+  // Position API /api/location/search/?lattlong=(latt),(long)
+  const POSITION_API = '/api/location/search/?lattlong='
   // Info state
   const [weatherState, setWeatherState] = useState([]);
 
   useEffect(() => {
       const getWeatherState = async () => {
 
+        const getLocation = () => new Promise(
+          (resolve, reject) => {
+            window.navigator.geolocation.getCurrentPosition(
+              position => {
+                const location = {
+                  lat:position.coords.latitude,
+                  long:position.coords.longitude
+                };
+                resolve(location); 
+              },
+              err => reject(err) 
+            );
+          }
+        );
+
         try{
-          // Location API petition
-          const locationFormatedURL = `${BASE_API_URL}${LOCATION_API}44418/`
-          const response = await fetch(locationFormatedURL)
-          const locationData = await response.json();
+          // Location Promise resolved
+          const coordinatesResponse = await getLocation()
+          let lattFormated = coordinatesResponse['lat'].toFixed(2)
+          let longFormated = coordinatesResponse['long'].toFixed(2)
+          
+          // Position API query
+          const positionFormatedURL = `${BASE_API_URL}${POSITION_API}${lattFormated},${longFormated}`
+          const positionResponse= await fetch(positionFormatedURL)
+          const positionData = await positionResponse.json()
+          console.log('Position data ', positionData)
+
+          // Location API query
+          const locationFormatedURL = `${BASE_API_URL}${LOCATION_API}${positionData[0].woeid}/`
+          const locationResponse = await fetch(locationFormatedURL)
+          const locationData = await locationResponse.json();
+          console.log('Location data ', positionData)
 
           // console.log('Response data: ', locationData)
           setWeatherState(locationData)
@@ -89,7 +114,11 @@ function App() {
             predicts={weatherState.consolidated_weather}
             date={weatherState.time}
           />
-          <HighLights />
+          <HighLights 
+            consolidated_weather={weatherState.consolidated_weather}
+          />
+
+          <p className="copyrgiht">Created by <a href="https://www.antoniochagoya.com.mx" target="_blank" rel="noreferrer">Antonio Chagoya</a></p>
         </main>
       </div>
 

@@ -4,7 +4,7 @@ import Thunder from '../assets/images/Thunderstorm.png'
 function Predicts({image_url, temperature, date, predicts}){
   const BASE_URL = `https://www.metaweather.com/static/img/weather/`
   
-  console.log('Response data: ', temperature)
+  // console.log('Response data: ', temperature)
 
   function getTemp(temperature, dayWanted){
     if(temperature && dayWanted){
@@ -20,14 +20,14 @@ function Predicts({image_url, temperature, date, predicts}){
     }
   }
 
-  function  formatImageUrl(images, placeholder, BASE_URL) {
+  function  formatImageUrl(images, imageWanted ,placeholder, BASE_URL) {
     const URL = BASE_URL
 
-    if(images){
+    if( images && imageWanted ){
       const imageUrls = images.map(image => {
         return image.weather_state_abbr
       });
-      return `${URL}${imageUrls[5]}.svg`
+      return `${URL}${imageUrls[imageWanted]}.svg`
     }else{
       return placeholder
     }
@@ -38,22 +38,18 @@ function Predicts({image_url, temperature, date, predicts}){
     const monthsText = ['Jan', 'Feb', 'Mar', 'Apr', 'May ', 'Jun', 'Jul ', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
     if (predicts && ( wantedDay >= 0 )) {
+      // Raw data
       let dayData = predicts[wantedDay] 
       let date = new Date(dayData.applicable_date)
-
-      let monthText = monthsText[date.getMonth()]
-
-      let dayOfTheMonth = date.getDate()
       let dayPosition = date.getDay()
-      let dayText = daysText[dayPosition-1]
+      
+      // Final data
+      let dayText = daysText[dayPosition]
+      let day = dayData.applicable_date.split('-')[2]
+      let monthText = monthsText[date.getMonth()]
       
 
-      console.log("" )
-      console.log('Real date ', date )
-      console.log('Day ', dayOfTheMonth )
-      console.log(`DayText: ${dayText}, Day: ${dayOfTheMonth}, Month ${monthText}`)
-      
-      return `${dayText}, ${dayOfTheMonth} ${monthText}` 
+      return `${dayText}, ${parseInt(day, 10)} ${monthText}` 
     }else{
       return '---'
     }
@@ -64,33 +60,33 @@ function Predicts({image_url, temperature, date, predicts}){
         {/* Predictions */}
         <div className="predicts--card">
           <h5>Tomorrow</h5>
-          <img src={formatImageUrl(image_url, Thunder, BASE_URL)} alt="" />
+          <img src={formatImageUrl(image_url, 1, Thunder, BASE_URL)} alt="" />
           <span className="predict">{getTemp(temperature, 1)}</span>
 
         </div>
         
         <div className="predicts--card">
           <h5>{getPredictsDays(predicts, 2)}</h5>
-          <img src={formatImageUrl(image_url, Thunder, BASE_URL)} alt="" />
+          <img src={formatImageUrl(image_url, 2, Thunder, BASE_URL)} alt="" />
           <span className="predict">{getTemp(temperature, 2)}</span>
         </div>
         
         <div className="predicts--card">
           <h5>{getPredictsDays(predicts, 3)}</h5>
-          <img src={formatImageUrl(image_url, Thunder, BASE_URL)} alt="" />
+          <img src={formatImageUrl(image_url, 3, Thunder, BASE_URL)} alt="" />
           <span className="predict">{getTemp(temperature, 3)}</span>
 
         </div>
         
         <div className="predicts--card">
           <h5>{getPredictsDays(predicts, 4)}</h5>
-          <img src={formatImageUrl(image_url, Thunder, BASE_URL)} alt="" />
+          <img src={formatImageUrl(image_url, 4, Thunder, BASE_URL)} alt="" />
           <span className="predict">{getTemp(temperature, 4)}</span>
         </div>
         
         <div className="predicts--card">
           <h5>{getPredictsDays(predicts, 5)}</h5>
-          <img src={formatImageUrl(image_url, Thunder, BASE_URL)} alt="" />
+          <img src={formatImageUrl(image_url, 5, Thunder, BASE_URL)} alt="" />
           <span className="predict">{getTemp(temperature, 5)}</span>
         </div>
         

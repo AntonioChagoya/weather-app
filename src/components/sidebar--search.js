@@ -1,11 +1,17 @@
-import React,{useCallback} from 'react';
+import React,{useCallback, useState} from 'react';
 import CloseIcon from '@material-ui/icons/Close';
 
-function SidebarSearch(searchState, setSearchState){
+function SidebarSearch(sidebarState){
 
   const handleInputChange = useCallback(() => { 
-      searchState.setSearchState(false)
-  },[searchState])
+    sidebarState.setSidebarState(false)
+  },[sidebarState])
+
+  const [searchState, setSearchState] = useState([])
+  function searchWoeid(e){
+    e.preventDefault()
+    console.log(searchState)
+  }
 
   return(
     <div className="sidebar--search">
@@ -13,10 +19,10 @@ function SidebarSearch(searchState, setSearchState){
         <button onClick={handleInputChange} className="search-button__close"><CloseIcon /></button> 
       </div>
       <div className="search--field">
-        <form action="post">
+        <form onSubmit={searchWoeid}>
           <div className="search__search-field">
-            <input type="search" name="city-search" id="" placeholder="search location" />
-            <button>Search</button>
+              <input onChange={ e => setSearchState(e.target.value) } type="search" name="city-search" id="searchField" placeholder="search location" />
+              <button >Search</button>
           </div>
           <div className="search--states-list">
             <ul>

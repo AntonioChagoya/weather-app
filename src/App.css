@@ -284,6 +284,7 @@
     margin: 60px 0 30px 0;
   }
   .search__search-field input[type="search"]{
+    width: auto;
     padding: 14px;
     border: 1px solid #f1f1f1;
   }
@@ -457,7 +458,7 @@
       padding: 0;
     }
     main{
-      padding: 3% 5%;
+      padding: 3% 5% 10px;
     }
     .App{
       height: 100vh;

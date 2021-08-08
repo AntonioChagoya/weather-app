@@ -19,12 +19,11 @@ function App() {
   const LOCATION_API = '/api/location/' 
   // Position API /api/location/search/?lattlong=(latt),(long)
   const POSITION_API = '/api/location/search/?lattlong='
-  // Info state
-  const [weatherState, setWeatherState] = useState([]);
 
+  // Weather state
+  const [weatherState, setWeatherState] = useState([]);
   useEffect(() => {
       const getWeatherState = async () => {
-
         const getLocation = () => new Promise(
           (resolve, reject) => {
             window.navigator.geolocation.getCurrentPosition(
@@ -50,35 +49,41 @@ function App() {
           const positionFormatedURL = `${BASE_API_URL}${POSITION_API}${lattFormated},${longFormated}`
           const positionResponse= await fetch(positionFormatedURL)
           const positionData = await positionResponse.json()
-          console.log('Position data ', positionData)
+          let woeid = await positionData[0].woeid || 116545;
+          // console.log('Position data ', woeid)
 
           // Location API query
-          const locationFormatedURL = `${BASE_API_URL}${LOCATION_API}${positionData[0].woeid}/`
+          const locationFormatedURL = `${BASE_API_URL}${LOCATION_API}${woeid}/`
           const locationResponse = await fetch(locationFormatedURL)
           const locationData = await locationResponse.json();
-          console.log('Location data ', positionData)
+          // console.log('Location data ', positionData)
 
           // console.log('Response data: ', locationData)
           setWeatherState(locationData)
         }catch(err){
-          console.log(err)
+           // Location API query
+           const locationFormatedURL = `${BASE_API_URL}${LOCATION_API}116545/`
+           const locationResponse = await fetch(locationFormatedURL)
+           const locationData = await locationResponse.json();
+
+          setWeatherState(locationData)
         }
         
       }
       getWeatherState()
-  }, [])
+  }, [BASE_API_URL,LOCATION_API, POSITION_API])
 
   // Sidebar State
   const [sidebarState, setSidebarState] = useState(false);
-  
+
   return (
       <div className="App">
         <aside className="sidebar" >
           { sidebarState 
             ? (
               <SidebarSearch 
-                searchState={sidebarState}
-                setSearchState={setSidebarState}
+                sidebarState={sidebarState}
+                setSidebarState={setSidebarState}
               />
             )
             : (
@@ -90,7 +95,6 @@ function App() {
                   >
                     Search for places
                   </button>   
-
                   <button className="btn--icon__round"><MyLocationIcon /></button> 
                 </ div>
                 <SidebarInfo 
@@ -100,7 +104,6 @@ function App() {
                   statusCollection={weatherState.consolidated_weather}
                   date={weatherState.time}
                   predicts={weatherState.consolidated_weather}
-
                 />
               </>
             )
@@ -117,7 +120,6 @@ function App() {
           <HighLights 
             consolidated_weather={weatherState.consolidated_weather}
           />
-
           <p className="copyrgiht">Created by <a href="https://www.antoniochagoya.com.mx" target="_blank" rel="noreferrer">Antonio Chagoya</a></p>
         </main>
       </div>

@@ -22,6 +22,8 @@ function App() {
 
   // Weather state
   const [weatherState, setWeatherState] = useState([]);
+  console.log('Weather State', weatherState)
+
   useEffect(() => {
       const getWeatherState = async () => {
         const getLocation = () => new Promise(
@@ -68,12 +70,11 @@ function App() {
 
           setWeatherState(locationData)
         }
-        
       }
       getWeatherState()
   }, [BASE_API_URL,LOCATION_API, POSITION_API])
 
-  // Sidebar State
+  // Sidebar State - Show/Hide Sidebar
   const [sidebarState, setSidebarState] = useState(false);
 
   return (
@@ -82,8 +83,10 @@ function App() {
           { sidebarState 
             ? (
               <SidebarSearch 
-                sidebarState={sidebarState}
+                sidebarState={sidebarState} 
                 setSidebarState={setSidebarState}
+
+                setWeatherState={setWeatherState}
               />
             )
             : (

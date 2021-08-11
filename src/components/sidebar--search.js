@@ -2,16 +2,47 @@ import React,{useCallback, useState} from 'react';
 import CloseIcon from '@material-ui/icons/Close';
 
 function SidebarSearch(sidebarState){
+  // Constant url for weather app 
+  const BASE_API_URL = 'https://www.metaweather.com'
+  // Woeid Location information, and a 5 day forecast. This API requieres a woeid number at the end - /api/location/woeid/
+  const WOEID_LOCATION_API = '/api/location/search/?query=' 
+  // Location information, and a 5 day forecast. This API requieres a woeid number at the end - /api/location/woeid/
+  const LOCATION_API = '/api/location/' 
+
+  const [searchState, setSearchState] = useState([])
 
   const handleInputChange = useCallback(() => { 
     sidebarState.setSidebarState(false)
   },[sidebarState])
 
-  const [searchState, setSearchState] = useState([])
-  function searchWoeid(e){
+  // Update weatherState using search input for location API
+  async function searchWoeid(e){
     e.preventDefault()
-    console.log(searchState)
+    
+    try{
+      // Location API query
+      const woeidLocationFormatedURL = `${BASE_API_URL}${WOEID_LOCATION_API}${searchState}`
+      const woeidLocationResponse = await fetch(woeidLocationFormatedURL)
+      const woeidLocationData = await woeidLocationResponse.json();
+      const woeid = woeidLocationData[0].woeid
+      
+      const locationFormatedURL = `${BASE_API_URL}${LOCATION_API}${woeid}/`
+      const locationResponse = await fetch(locationFormatedURL)
+      const locationData = await locationResponse.json();
+
+      console.log('Search', searchState)
+      console.log('Woeid', woeid)
+      console.log('Location Data', locationData)
+
+      sidebarState.setWeatherState(locationData)
+      sidebarState.setSidebarState(false)
+    }catch(err){
+      console.log(new Error(err))
+      alert(`Your search can't be completed, please consult available woeid list at: https://www.findmecity.com/`)
+    }
   }
+
+  // Update weatrherState using known cities with location API
 
   return(
     <div className="sidebar--search">
@@ -21,7 +52,7 @@ function SidebarSearch(sidebarState){
       <div className="search--field">
         <form onSubmit={searchWoeid}>
           <div className="search__search-field">
-              <input onChange={ e => setSearchState(e.target.value) } type="search" name="city-search" id="searchField" placeholder="search location" />
+              <input onChange={ e => setSearchState(e.target.value) } type="search" name="city-search" id="searchField" placeholder="Search your city" />
               <button >Search</button>
           </div>
           <div className="search--states-list">

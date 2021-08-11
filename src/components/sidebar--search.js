@@ -18,21 +18,21 @@ function SidebarSearch(sidebarState){
   // Update weatherState using search input for location API
   async function searchWoeid(e){
     e.preventDefault()
-    
     try{
-      // Location API query
+      // Woeid Location API query
       const woeidLocationFormatedURL = `${BASE_API_URL}${WOEID_LOCATION_API}${searchState}`
       const woeidLocationResponse = await fetch(woeidLocationFormatedURL)
       const woeidLocationData = await woeidLocationResponse.json();
       const woeid = woeidLocationData[0].woeid
-      
+
+      // Location API query
       const locationFormatedURL = `${BASE_API_URL}${LOCATION_API}${woeid}/`
       const locationResponse = await fetch(locationFormatedURL)
       const locationData = await locationResponse.json();
 
-      console.log('Search', searchState)
-      console.log('Woeid', woeid)
-      console.log('Location Data', locationData)
+      // console.log('Search', searchState)
+      // console.log('Woeid', woeid)
+      // console.log('Location Data', locationData)
 
       sidebarState.setWeatherState(locationData)
       sidebarState.setSidebarState(false)
@@ -43,6 +43,32 @@ function SidebarSearch(sidebarState){
   }
 
   // Update weatrherState using known cities with location API
+  async function cityItem(e){
+    e.preventDefault()
+
+    try{
+      // Woeid Location API query
+      const woeidLocationFormatedURL = `${BASE_API_URL}${WOEID_LOCATION_API}${searchState}`
+      const woeidLocationResponse = await fetch(woeidLocationFormatedURL)
+      const woeidLocationData = await woeidLocationResponse.json();
+      const woeid = woeidLocationData[0].woeid
+
+      // Location API query
+      const locationFormatedURL = `${BASE_API_URL}${LOCATION_API}${woeid}/`
+      const locationResponse = await fetch(locationFormatedURL)
+      const locationData = await locationResponse.json();
+
+      // console.log('Search', searchState)
+      // console.log('Woeid', woeid)
+      // console.log('Location Data', locationData)
+
+      sidebarState.setWeatherState(locationData)
+      sidebarState.setSidebarState(false)
+    }catch(err){
+      console.log(new Error(err))
+    }
+    console.log('Search state',searchState)
+  }
 
   return(
     <div className="sidebar--search">
@@ -55,30 +81,33 @@ function SidebarSearch(sidebarState){
               <input onChange={ e => setSearchState(e.target.value) } type="search" name="city-search" id="searchField" placeholder="Search your city" />
               <button >Search</button>
           </div>
+        </form>
+
+        <form onSubmit={cityItem}>
           <div className="search--states-list">
             <ul>
               <li>
-                  <input type="button" value="London" /> 
+                  <button onClick={ e => setSearchState(e.target.value)} type="submit" value="London">London</button>
               </li>
               <li>
-                  <input type="button" value="Barcelona" /> 
+                  <button onClick={ e => setSearchState(e.target.value)} type="submit" value="Barcelona">Barcelona</button>
               </li>
               <li>
-                  <input type="button" value="México" /> 
+                  <button onClick={ e => setSearchState(e.target.value)} type="submit" value="Mexico">México</button>
               </li>
               <li>
-                  <input type="button" value="México" /> 
+                  <button onClick={ e => setSearchState(e.target.value)} type="submit" value="New york">New York</button>
               </li>
               <li>
-                  <input type="button" value="México" /> 
+                  <button onClick={ e => setSearchState(e.target.value)} type="submit" value="Paris">París</button>
               </li>
               <li>
-                  <input type="button" value="México" /> 
+                  <button onClick={ e => setSearchState(e.target.value)} type="submit" value="Tokyo">Tokyo</button>
               </li>
             </ul>
           </div>
-
         </form>
+
       </div>
       
     </div> 

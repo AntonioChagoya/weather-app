@@ -22,7 +22,7 @@ function App() {
 
   // Weather state
   const [weatherState, setWeatherState] = useState([]);
-  console.log('Weather State', weatherState)
+  // console.log('Weather State', weatherState)
 
   useEffect(() => {
       const getWeatherState = async () => {
@@ -60,7 +60,7 @@ function App() {
           const locationData = await locationResponse.json();
           // console.log('Location data ', positionData)
 
-          // console.log('Response data: ', locationData)
+          console.log('Response data: ', locationData)
           setWeatherState(locationData)
         }catch(err){
            // Location API query

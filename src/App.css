@@ -265,17 +265,21 @@
     max-height: 100%;
     transition: 1s;
   }
-  .sidebar--search input{
+  .sidebar--search .search--states-list button{
     width: 100%;
     margin: 8px 0;
     border: 1px solid transparent;
     padding: 23px;
-
+    text-align: left;
+    background-color: transparent;
+    box-shadow: none;
   }
-  .sidebar--search input:hover{
+  .sidebar--search .search--states-list button:hover{
     border: 1px solid #616475;
+    transform: none;
+    transition: 500ms;
   }
-  .sidebar--search input::placeholder{
+  .sidebar--search .search--states-list button::placeholder{
     color: #616475;
   }
   .search__search-field{
@@ -442,7 +446,18 @@
     max-height: 160px;
     min-height: 159px;
   }
-
+  .wind--direction{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .wind--direction svg{
+    background-color: gray;
+    border-radius: 100px;
+    margin-right: 10px;
+    transform: scale(1.2);
+    padding: 5px;
+  }
   /* Copyright */
   .copyrgiht{
     text-align: center;

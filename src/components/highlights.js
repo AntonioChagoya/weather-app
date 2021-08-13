@@ -4,6 +4,14 @@ import LoopIcon from "@material-ui/icons/Loop";
 import { Container, createStyles, makeStyles } from "@material-ui/core";
 
 function HighLights({consolidated_weather}){
+  const useStyles = makeStyles(() =>
+    createStyles({
+      rotateIcon: {
+        animation: "spin 1.5s ease-in-out forwards",
+      }
+    })
+  );
+  const classes = useStyles();
 
   // Get visibility from API consolidated weather
   function getVisibility(weather, dayWanted) {
@@ -51,15 +59,6 @@ function HighLights({consolidated_weather}){
     }
   }
 
-  const useStyles = makeStyles(() =>
-    createStyles({
-      rotateIcon: {
-        animation: "spin 1.5s ease-in-out forwards",
-      }
-    })
-  );
-  const classes = useStyles();
-
   // Get wind direction degrees from API consolidated weather
   function getWindDirection(weatherData) {
     if (weatherData) {
@@ -82,8 +81,6 @@ function HighLights({consolidated_weather}){
           </>
       )
     }else{
-      var windDirection = 90
-
       return (
         <Container >
           <NavigationIcon className={classes.rotateIcon} />

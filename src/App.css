@@ -133,7 +133,7 @@
     background-color: #1E213A;
     width: 31%;
     height: 100%;
-    padding: 3% 0;
+    padding: 5% 0;
   }
 
   /* - Weather */
@@ -323,7 +323,10 @@
     padding: 10%;
     color: rgb(182, 182, 182);
   }
-
+  .knowncities{
+    overflow-y: auto;
+    max-height: 60vh;
+  }
   /* 
   * Unis container
   */
@@ -520,6 +523,7 @@
     /* Sidebar */
     .sidebar{
       width: 100%;
+      min-height: 100vh;
     }
 
     /* - Weather */

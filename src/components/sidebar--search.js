@@ -83,7 +83,7 @@ function SidebarSearch(sidebarState){
           </div>
         </form>
 
-        <form onSubmit={cityItem}>
+        <form className="knowncities" onSubmit={cityItem}>
           <div className="search--states-list">
             <ul>
               <li>
@@ -103,6 +103,21 @@ function SidebarSearch(sidebarState){
               </li>
               <li>
                   <button onClick={ e => setSearchState(e.target.value)} type="submit" value="Tokyo">Tokyo</button>
+              </li>
+              <li>
+                  <button onClick={ e => setSearchState(e.target.value)} type="submit" value="Bogotá">Bogotá</button>
+              </li>
+              <li>
+                  <button onClick={ e => setSearchState(e.target.value)} type="submit" value="Caracas">Caracas</button>
+              </li>
+              <li>
+                  <button onClick={ e => setSearchState(e.target.value)} type="submit" value="Madrid">Madrid</button>
+              </li>
+              <li>
+                  <button onClick={ e => setSearchState(e.target.value)} type="submit" value="Toronto">Toronto</button>
+              </li>
+              <li>
+                  <button onClick={ e => setSearchState(e.target.value)} type="submit" value="Stockholm">Stockholm</button>
               </li>
             </ul>
           </div>

@@ -129,6 +129,7 @@
   .sidebar{
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     background-color: #1E213A;
     width: 31%;
@@ -262,8 +263,9 @@
 
   /* - Search modal */
   .sidebar--search{
-    max-height: 100%;
+    max-height: 100vh;
     transition: 1s;
+    padding: 0 10%;
   }
   .sidebar--search .search--states-list button{
     width: 100%;
@@ -317,6 +319,10 @@
   }
   .search-button__close svg{ 
     transform: scale(1.4);
+  }
+  .instructions{
+    padding: 10%;
+    color: rgb(182, 182, 182);
   }
 
   /* 

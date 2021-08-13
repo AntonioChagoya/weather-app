@@ -3,7 +3,7 @@ import CloseIcon from '@material-ui/icons/Close';
 
 function SidebarSearch(sidebarState){
   // Constant url for weather app 
-  const BASE_API_URL = 'https://www.metaweather.com'
+  const BASE_API_URL = 'https://cors-anywhere.herokuapp.com/https://www.metaweather.com'
   // Woeid Location information, and a 5 day forecast. This API requieres a woeid number at the end - /api/location/woeid/
   const WOEID_LOCATION_API = '/api/location/search/?query=' 
   // Location information, and a 5 day forecast. This API requieres a woeid number at the end - /api/location/woeid/
@@ -106,6 +106,7 @@ function SidebarSearch(sidebarState){
               </li>
             </ul>
           </div>
+          
         </form>
 
       </div>

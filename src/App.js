@@ -52,15 +52,15 @@ function App() {
           const positionResponse= await fetch(positionFormatedURL)
           const positionData = await positionResponse.json()
           let woeid = await positionData[0].woeid || 116545;
-          console.log('Position data ', woeid)
+          // console.log('Position data ', woeid)
 
           // Location API query
           const locationFormatedURL = `${BASE_API_URL}${LOCATION_API}${woeid}/`
-          console.log('Response data: ', locationFormatedURL)
           const locationResponse = await fetch(locationFormatedURL, )
           const locationData = await locationResponse.json();
-          console.log('Location data ', positionData)
-
+          console.log('Location data ', locationData)
+          // console.log('Response data: ', locationFormatedURL)
+          
           setWeatherState(locationData)
         }catch(err){
            // Location API query

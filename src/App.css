@@ -466,6 +466,11 @@
     transform: scale(1.2);
     padding: 5px;
   }
+  .MuiContainer-root{
+    padding-left: 0;
+    padding-right: 0;
+  }
+
   /* Copyright */
   .copyrgiht{
     text-align: center;

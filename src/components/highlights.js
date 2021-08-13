@@ -1,6 +1,7 @@
 import React from 'react';
 import NavigationIcon from '@material-ui/icons/Navigation';
-
+import LoopIcon from "@material-ui/icons/Loop";
+import { Container, createStyles, makeStyles } from "@material-ui/core";
 
 function HighLights({consolidated_weather}){
 
@@ -24,14 +25,79 @@ function HighLights({consolidated_weather}){
     }
   }
 
-  // Get wind direction from API consolidated weather
-  function getWindDirection(weatherData) {
+  // Get wind direction string from API consolidated weather
+  function getWindDirectionCompas(weatherData) {
     if (weatherData) {
       var windDirection = consolidated_weather[0].wind_direction_compass
       // console.log('Wind direction',windDirection)
       return windDirection
     }else{
-      return '____'
+      return (
+        <>
+        <LoopIcon className={classes.rotateIcon} />
+        <style>
+          {`
+            @keyframes spin {
+              0% { transform: rotate(0deg); }
+              100% { 
+                transform: rotate(${windDirection}deg); 
+                animation-fill-mode: forwards; 
+              }
+            }
+          `}
+        </style>
+        </>
+      )
+    }
+  }
+
+  const useStyles = makeStyles(() =>
+    createStyles({
+      rotateIcon: {
+        animation: "spin 1.5s ease-in-out forwards",
+      }
+    })
+  );
+  const classes = useStyles();
+
+  // Get wind direction degrees from API consolidated weather
+  function getWindDirection(weatherData) {
+    if (weatherData) {
+      var windDirection = consolidated_weather[0].wind_direction.toFixed(0)
+      // var windDirection = 180
+
+      console.log('Wind direction',windDirection)
+      return (
+        <>
+          <NavigationIcon className={classes.rotateIcon} />
+          <style>{`
+            @keyframes spin {
+              0% { transform: rotate(0deg); }
+              100% { 
+                transform: rotate(${windDirection}deg); 
+                animation-fill-mode: forwards; 
+              }
+            }
+          `}</style>
+          </>
+      )
+    }else{
+      var windDirection = 90
+
+      return (
+        <Container >
+          <NavigationIcon className={classes.rotateIcon} />
+          <style>{`
+               @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { 
+                  transform: rotate(${windDirection}deg); 
+                  animation-fill-mode: forwards; 
+                }
+              }
+            `}</style>
+        </Container>
+      )
     }
   }
 
@@ -42,6 +108,7 @@ function HighLights({consolidated_weather}){
       return windSpeed.toFixed(0)
     }
   }
+
   return  (
     <section className="highlights">
       <h2>Today's Highlights</h2>
@@ -51,7 +118,7 @@ function HighLights({consolidated_weather}){
           <h5>Wind status</h5>
           <h3>{getWindSpeed(consolidated_weather)}<span>mph</span></h3>
           <div className="wind--direction">
-            <NavigationIcon /><h5>{getWindDirection(consolidated_weather)}</h5>
+           {getWindDirection(consolidated_weather)}<h5>{getWindDirectionCompas(consolidated_weather)}</h5>
           </div>
         </div>
         <div className=" highlights--box highlights--box__big">

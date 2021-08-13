@@ -560,7 +560,7 @@
     /* Highlights */
     .highlights--container {
       gap: 30px;
-  }
+    }
     .highlights h3 {
       font-size: 40px;
     }
@@ -618,5 +618,10 @@
     }
     .predicts--card span{
       margin-top: 15px;
+    }
+   
+    /* Highlights */
+    .highlights--container {
+      gap: 15px;
     }
   }

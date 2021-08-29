@@ -266,6 +266,9 @@
     transition: 1s;
     padding: 0 10%;
   }
+  .search--states-list ul{
+    padding-right: 10px;
+  }
   .sidebar--search .search--states-list button{
     width: 100%;
     margin: 8px 0;
@@ -604,7 +607,9 @@
       width: 100%;
       min-height: 810px;
     }
-
+    .highlights--container{
+      grid-template: 1fr .5fr/1fr;
+    }
     /* - Weather */
     .weather--visual img {
       width: 50%;

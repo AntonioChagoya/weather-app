@@ -1,17 +1,16 @@
-import React from 'react';
+import React from "react";
 
-function ConverUnits(){
-
-  return  (
+function ConverUnits() {
+  return (
     <div className="units--container">
       <span className="units units--celcius active">
-        <button>°C</button> 
+        <button>°C</button>
       </span>
       <span className="units units--fahrenheit">
-        <button>°F</button> 
+        <button>°F</button>
       </span>
     </div>
-  )
+  );
 }
 
 export default ConverUnits;

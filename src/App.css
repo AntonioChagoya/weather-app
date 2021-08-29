@@ -639,3 +639,13 @@
       gap: 15px;
     }
   }
+
+
+  .sidebar--search {
+    opacity: 0.01;
+  }
+  
+  .sidebar--search.sidebar--search-active {
+    opacity: 1;
+    transition: opacity .5s ease-in;
+  }

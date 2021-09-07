@@ -3,8 +3,7 @@ import CloseIcon from "@material-ui/icons/Close";
 
 function SidebarSearch(sidebarState) {
   // Constant url for weather app
-  const BASE_API_URL =
-    "https://cors-anywhere.herokuapp.com/https://www.metaweather.com";
+  const BASE_API_URL = "https://www.metaweather.com";
   // Woeid Location information, and a 5 day forecast. This API requieres a woeid number at the end - /api/location/woeid/
   const WOEID_LOCATION_API = "/api/location/search/?query=";
   // Location information, and a 5 day forecast. This API requieres a woeid number at the end - /api/location/woeid/
@@ -21,8 +20,12 @@ function SidebarSearch(sidebarState) {
     e.preventDefault();
     try {
       // Woeid Location API query
-      const woeidLocationFormatedURL = `${BASE_API_URL}${WOEID_LOCATION_API}${searchState}`;
-      const woeidLocationResponse = await fetch(woeidLocationFormatedURL);
+      // const woeidLocationFormatedURL = `${BASE_API_URL}${WOEID_LOCATION_API}${searchState}`;
+      const woeidLocationResponse = await fetch("/.netlify/functions/search-state", { 
+        headers: { 
+          accept: "Accept: application/json" 
+        },
+      });
       const woeidLocationData = await woeidLocationResponse.json();
       const woeid = woeidLocationData[0].woeid;
 
@@ -52,13 +55,21 @@ function SidebarSearch(sidebarState) {
     try {
       // Woeid Location API query
       const woeidLocationFormatedURL = `${BASE_API_URL}${WOEID_LOCATION_API}${searchState}`;
-      const woeidLocationResponse = await fetch(woeidLocationFormatedURL);
+      const woeidLocationResponse = await fetch("/.netlify/functions/node-fetch/search-state", { 
+        headers: { 
+          accept: "Accept: application/json" 
+        } 
+      });
       const woeidLocationData = await woeidLocationResponse.json();
       const woeid = woeidLocationData[0].woeid;
 
       // Location API query
       const locationFormatedURL = `${BASE_API_URL}${LOCATION_API}${woeid}/`;
-      const locationResponse = await fetch(locationFormatedURL);
+      const locationResponse = await fetch("/.netlify/functions/node-fetch/search-location", { 
+        headers: { 
+          accept: "Accept: application/json" 
+        } 
+      });
       const locationData = await locationResponse.json();
 
       // console.log('Search', searchState)

@@ -63,9 +63,7 @@ function HighLights({ consolidated_weather }) {
   function getWindDirection(weatherData) {
     if (weatherData) {
       var windDirection = consolidated_weather[0].wind_direction.toFixed(0);
-      // var windDirection = 180
 
-      console.log("Wind direction", windDirection);
       return (
         <>
           <NavigationIcon className={classes.rotateIcon} />

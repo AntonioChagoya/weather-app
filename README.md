@@ -18,4 +18,4 @@ Create a weather app using an API. Use Front-end libraries like React or Vue.
 Icon: https://google.github.io/material-design-icons/  
 API: https://www.metaweather.com/api/ 
 
-Tips: For Front-end developer, you can use https://cors-anywhere.herokuapp.com/ to help with accessing data from other websites that are normally forbidden by the same-origin policy of web browsers
+Tips: For Front-end developer, you can use  to help with accessing data from other websites that are normally forbidden by the same-origin policy of web browsers

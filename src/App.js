@@ -12,12 +12,8 @@ import HighLights from "./components/highlights";
 import MyLocationIcon from "@material-ui/icons/MyLocation";
 
 function App() {
-  // Temporary CORS link
-  const temporaryCors = "https://cors-anywhere.herokuapp.com/corsdemo";
-
   // Constant url for weather app
-  const BASE_API_URL =
-    "https://cors-anywhere.herokuapp.com/https://www.metaweather.com";
+  const BASE_API_URL = "https://www.metaweather.com";
 
   const LOCATION_API = "/api/location/";
 
@@ -25,25 +21,7 @@ function App() {
 
   const [weatherState, setWeatherState] = useState([]);
 
-  function corsPolicyAlert(temporaryCorsLink) {
-    if (
-      window.confirm(
-        `This just a portfolio temporary app. Does not have SSR.\r\n
-        Because of that if you want to see how the app works, please click on accept. You will be redirected to an authenticacion page, where you have to click on "Request temporary access to the demo server" and come back to try the weather app.\r\n
-        If you already requested access click on cancel.
-        `
-      )
-    ) {
-      window.open(`https://cors-anywhere.herokuapp.com/corsdemo`, "_blank");
-    }
-  }
-
   useEffect(() => {
-
-    setTimeout(()=>{
-      corsPolicyAlert(temporaryCors);
-    })
-
     const getWeatherState = async () => {
       const getLocation = () =>
         new Promise((resolve, reject) => {
@@ -72,18 +50,31 @@ function App() {
         let woeid = (await positionData[0].woeid) || 116545;
 
         // Location API query
-        const locationFormatedURL = `${BASE_API_URL}${LOCATION_API}${woeid}/`;
-        const locationResponse = await fetch(locationFormatedURL);
+        // const locationFormatedURL = `${BASE_API_URL}${LOCATION_API}${woeid}/`;
+        const locationResponse = await fetch("/.netlify/functions/search-location", { 
+          method: "post",
+          headers: { 
+            accept: "Accept: application/json" 
+          },
+          body: JSON.stringify({
+            woeid: woeid,
+          })
+        });
         const locationData = await locationResponse.json();
         console.log("Location data ", locationData);
 
         setWeatherState(locationData);
       } catch (err) {
         // Location API query
-        const locationFormatedURL = `${BASE_API_URL}${LOCATION_API}116545/`;
-        const locationResponse = await fetch(locationFormatedURL);
+        // const locationFormatedURL = `${BASE_API_URL}${LOCATION_API}116545/`;
+        const locationResponse = await fetch("/.netlify/functions/search-location/", { 
+          headers: { 
+            accept: "Accept: application/json" 
+          },
+        });
         const locationData = await locationResponse.json();
-
+        
+        console.log('locationData', locationData)
         setWeatherState(locationData);
       }
     };
@@ -137,11 +128,7 @@ function App() {
         <HighLights consolidated_weather={weatherState.consolidated_weather} />
         <p className="copyrgiht">
           Created by{" "}
-          <a
-            href="https://www.antoniochagoya.com.mx"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a href="https://www.antoniochagoya.com.mx" target="_blank" rel="noreferrer">
             Antonio Chagoya
           </a>
         </p>
